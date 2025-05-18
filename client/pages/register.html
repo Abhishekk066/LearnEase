@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head id="head">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register | learnEase</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/css/import.css" />
+    <link rel="stylesheet" href="/css/auth.css" />
+  </head>
+  <body>
+    <div class="loader" id="loader"></div>
+    <main class="con" id="con">
+      <header>
+        <div class="ad">
+          <span class="ph"><i class="fa fa-phone"></i> +91 1234567890 </span>
+          <div class="social">
+            <span class="fol">Follow us on</span>
+            <a href="https://wa.me/9142555415/" target="_blank"
+              ><i class="fa-brands fa-whatsapp"></i
+            ></a>
+            <a href="https://www.facebook.com/" target="_blank"
+              ><i class="fa-brands fa-facebook"></i
+            ></a>
+            <a href="https://www.twitter.com/" target="_blank"
+              ><i class="fa-brands fa-x-twitter"></i
+            ></a>
+            <a href="https://www.instagram.com/" target="_blank"
+              ><i class="fa-brands fa-instagram"></i
+            ></a>
+            <a href="https://www.instagram.com/" target="_blank"
+              ><i class="fab fa-linkedin-in"></i>
+            </a>
+          </div>
+        </div>
+        <div class="nav-bar">
+          <nav>
+            <h4>
+              <a href="/"> <i class="fas fa-graduation-cap"></i> LearnEase</a>
+            </h4>
+            <div class="nav-menu">
+              <div class="nav-btn">
+                <a href="/user/login" target="_blank" class="btn btn-primary"
+                  >Login</a
+                >
+              </div>
+              <div class="mode" id="mode">
+                <div class="mod-lo" id="modlo"></div>
+                <i class="fa-regular fa-moon" id="dark"></i>
+                <i class="fa-regular fa-sun" id="light"></i>
+              </div>
+            </div>
+          </nav>
+        </div>
+      </header>
+      <section class="form-body">
+        <div class="form-header">
+          <h1>CREATE YOUR ACCOUNT</h1>
+          <div class="progress-bar" id="progress-bar"></div>
+        </div>
+
+        <form method="post" id="register-form" novalidate>
+          <div class="field-group">
+            <label for="fname">First Name</label>
+            <i class="fas fa-user field-icon"></i>
+            <input
+              type="text"
+              name="firstname"
+              placeholder="Enter your first name"
+              id="fname"
+              autocomplete="given-name"
+              required />
+            <div class="error-message" id="fname-error">
+              Please enter your first name
+            </div>
+          </div>
+
+          <div class="field-group">
+            <label for="lname">Last Name</label>
+            <i class="fas fa-user field-icon"></i>
+            <input
+              type="text"
+              name="lastname"
+              placeholder="Enter your last name"
+              id="lname"
+              autocomplete="family-name"
+              required />
+            <div class="error-message" id="lname-error">
+              Please enter your last name
+            </div>
+          </div>
+
+          <div class="field-group">
+            <label for="email">Email Address</label>
+            <i class="fas fa-envelope field-icon"></i>
+            <input
+              type="email"
+              name="email"
+              placeholder="Enter your email address"
+              id="email"
+              autocomplete="email"
+              required />
+            <div class="error-message" id="email-error">
+              Please enter a valid email address
+            </div>
+          </div>
+
+          <div class="field-group">
+            <label for="mob">Mobile Number</label>
+            <i class="fas fa-phone field-icon"></i>
+            <input
+              type="tel"
+              name="mobile"
+              placeholder="Enter your mobile number"
+              id="mob"
+              autocomplete="tel"
+              required />
+            <div class="error-message" id="mob-error">
+              Please enter a valid 10 digit mobile number
+            </div>
+          </div>
+
+          <div class="field-group">
+            <label for="add">Address</label>
+            <i class="fas fa-map-marker-alt field-icon"></i>
+            <input
+              type="text"
+              name="address"
+              placeholder="Enter your address"
+              id="add"
+              autocomplete="street-address"
+              required />
+            <div class="error-message" id="add-error">
+              Please enter your address
+            </div>
+          </div>
+
+          <div class="field-group">
+            <label for="pass">Password</label>
+            <i class="fas fa-lock field-icon"></i>
+            <i class="fas fa-eye-slash pass-view"></i>
+            <input
+              type="password"
+              name="password"
+              placeholder="Create a strong password"
+              id="pass"
+              autocomplete="new-password"
+              required />
+            <div class="strength-meter" id="strength-meter">
+              <div class="strength-meter-fill" id="strength-meter-fill"></div>
+            </div>
+            <div class="password-info" id="password-info">
+              Password should be at least 8 characters with letters, numbers,
+              and special characters
+            </div>
+            <div class="error-message" id="pass-error">
+              Password must be at least 8 characters
+            </div>
+          </div>
+
+          <div class="field-group" style="display: none">
+            <label for="confirm-pass">Confirm Password</label>
+            <i class="fas fa-lock field-icon"></i>
+            <i class="fas fa-eye-slash pass-view"></i>
+            <input
+              type="password"
+              name="confirmPassword"
+              placeholder="Re-enter your password"
+              id="confirm-pass"
+              autocomplete="new-password"
+              required />
+            <div class="error-message" id="confirm-pass-error">
+              Passwords do not match
+            </div>
+          </div>
+
+          <button type="submit" class="submit-btn" id="submit-btn">
+            <span class="btn-text">Create Account</span>
+            <span class="btn-spinner"
+              ><i class="fas fa-spinner fa-spin"></i
+            ></span>
+          </button>
+
+          <div class="form-footer">
+            <span
+              >Already have an account? <a href="/user/login">Sign In</a></span
+            >
+          </div>
+        </form>
+      </section>
+      <div class="toast" id="toast"></div>
+      <footer class="footer">
+        <div class="container">
+          <div class="footer-grid">
+            <div class="footer-column">
+              <h3 class="footer-logo">LearnEase</h3>
+              <p>
+                Our mission is to provide high-quality education that's
+                accessible to everyone, empowering learners worldwide to achieve
+                their goals.
+              </p>
+              <div class="social-links">
+                <a href="https://wa.me/9142555415/" target="_blank"
+                  ><i class="fa-brands fa-whatsapp"></i
+                ></a>
+                <a href="https://www.facebook.com/" target="_blank"
+                  ><i class="fa-brands fa-facebook"></i
+                ></a>
+                <a href="https://www.twitter.com/" target="_blank"
+                  ><i class="fa-brands fa-x-twitter"></i
+                ></a>
+                <a href="https://www.instagram.com/" target="_blank"
+                  ><i class="fa-brands fa-instagram"></i
+                ></a>
+                <a href="https://www.linkedin.com/" target="_blank"
+                  ><i class="fab fa-linkedin-in"></i>
+                </a>
+              </div>
+            </div>
+            <div class="footer-column">
+              <h4>Quick Links</h4>
+              <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/courses">Courses</a></li>
+                <li><a href="/about">About Us</a></li>
+                <li><a href="/contact">Contact</a></li>
+                <li><a href="/faq">FAQ</a></li>
+              </ul>
+            </div>
+            <div class="footer-column">
+              <h4>Categories</h4>
+              <ul>
+                <li><a href="/courses?category=Development">Development</a></li>
+                <li><a href="/courses?category=Business">Business</a></li>
+                <li><a href="/courses?category=Design">Design</a></li>
+                <li><a href="/courses?category=Marketing">Marketing</a></li>
+                <li><a href="/courses?category=Music">Music</a></li>
+              </ul>
+            </div>
+            <div class="footer-column">
+              <h4>Contact Us</h4>
+              <ul class="contact-info">
+                <li>
+                  <i class="fas fa-map-marker-alt"></i>
+                  <span>123 Education St, Learning City</span>
+                </li>
+                <li>
+                  <i class="fas fa-phone"></i>
+                  <span>+91 (555) 123-4567</span>
+                </li>
+                <li>
+                  <i class="fas fa-envelope"></i>
+                  <span>contact@learnease.com</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="footer-divider"></div>
+          <div class="footer-grid">
+            <div class="footer-column">
+              <h4>Idea and Designed By</h4>
+              <ul class="contact-info">
+                <li>
+                  <i class="fa-solid fa-user-tie"></i>
+                  <span>Ankit Kumar Sen</span>
+                </li>
+                <li>
+                  <i class="fas fa-phone"></i>
+                  <span>+91 (555) 123-4567</span>
+                </li>
+                <li>
+                  <i class="fas fa-envelope"></i>
+                  <span>contact@gmail.com</span>
+                </li>
+              </ul>
+            </div>
+            <div class="footer-column">
+              <h4>Developed By</h4>
+              <ul class="contact-info">
+                <li>
+                  <i class="fa-solid fa-user-tie"></i>
+                  <span>Abhishek Kumar</span>
+                </li>
+                <li>
+                  <i class="fas fa-phone"></i>
+                  <span>+91 (555) 123-4567</span>
+                </li>
+                <li>
+                  <i class="fas fa-envelope"></i>
+                  <span>contact@gmail.com</span>
+                </li>
+              </ul>
+            </div>
+            <div class="footer-column">
+              <h4>All Team Members</h4>
+              <ul class="contact-info">
+                <li class="team-member">
+                  <i class="fa-solid fa-arrow-right"></i>
+                  <span>Aryan Kumar</span>
+                </li>
+                <li class="team-member">
+                  <i class="fa-solid fa-arrow-right"></i>
+                  <span>Sonam Kumari</span>
+                </li>
+                <li class="team-member">
+                  <i class="fa-solid fa-arrow-right"></i>
+                  <span>Mantu Kumar</span>
+                </li>
+                <li class="team-member">
+                  <i class="fa-solid fa-arrow-right"></i>
+                  <span>Ankush Kumar</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="footer-divider"></div>
+          <div class="footer-bottom">
+            <p class="copyright">&copy; 2025 LearnEase. All rights reserved.</p>
+            <div class="footer-links">
+              <a href="/privacy">Privacy Policy</a>
+              <a href="/terms">Terms of Service</a>
+              <a href="/cookies">Cookie Policy</a>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </main>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        var loader = document.getElementById('loader');
+        var content = document.getElementById('con');
+        setTimeout(function () {
+          loader.style.display = 'none';
+          content.style.display = 'block';
+          setTimeout(function () {
+            content.style.opacity = 1;
+          }, 50);
+        }, 1000);
+      });
+    </script>
+    <script src="/js/mode.js"></script>
+    <script src="/js/nav.js"></script>
+    <script src="/js/register.js"></script>
+  </body>
+</html>

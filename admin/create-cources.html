@@ -1,0 +1,1483 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LearnEase Admin Panel</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <style>
+      :root {
+        --primary-color: #4361ee;
+        --secondary-color: #3f37c9;
+        --accent-color: #4cc9f0;
+        --success-color: #4ade80;
+        --warning-color: #fbbf24;
+        --danger-color: #f87171;
+        --text-dark: #1f2937;
+        --text-light: #f9fafb;
+        --bg-light: #f9fafb;
+        --bg-dark: #111827;
+        --border-color: #e5e7eb;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      body {
+        background-color: var(--bg-light);
+        color: var(--text-dark);
+        min-height: 100vh;
+        display: flex;
+      }
+
+      a {
+        color: #fff;
+        text-decoration: none;
+      }
+
+      .sidebar {
+        width: 250px;
+        background-color: var(--bg-dark);
+        color: var(--text-light);
+        height: 100vh;
+        position: fixed;
+        transition: all 0.3s ease;
+      }
+
+      .sidebar-header {
+        padding: 10px 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .logo {
+        font-size: 24px;
+        font-weight: bold;
+        color: var(--accent-color);
+      }
+
+      .menu-toggle {
+        display: none;
+        cursor: pointer;
+        font-size: 20px;
+      }
+
+      .admin-info {
+        padding: 20px;
+        text-align: center;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .admin-avatar {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        background-color: var(--accent-color);
+        margin: 0 auto 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 32px;
+      }
+
+      .admin-name {
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
+
+      .admin-role {
+        font-size: 14px;
+        opacity: 0.7;
+      }
+
+      .sidebar-menu {
+        padding: 20px 0;
+      }
+
+      .menu-category {
+        padding: 10px 20px;
+        font-size: 14px;
+        opacity: 0.7;
+        text-transform: uppercase;
+      }
+
+      .menu-item {
+        padding: 12px 20px;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+
+      .menu-item:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+
+      .menu-item.active {
+        background-color: var(--primary-color);
+      }
+
+      .menu-item i {
+        margin-right: 10px;
+        width: 20px;
+        text-align: center;
+      }
+
+      .main-content {
+        flex: 1;
+        padding: 20px;
+        margin-left: 250px;
+        transition: all 0.3s ease;
+      }
+
+      .header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 30px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      .page-title {
+        font-size: 24px;
+        font-weight: bold;
+        color: var(--text-dark);
+      }
+
+      .header-actions {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+
+      .search-box {
+        display: flex;
+        align-items: center;
+        background-color: white;
+        border-radius: 6px;
+        padding: 8px 15px;
+        border: 1px solid var(--border-color);
+      }
+
+      .search-box input {
+        border: none;
+        outline: none;
+        margin-left: 10px;
+        width: 200px;
+      }
+
+      .notification-bell {
+        position: relative;
+        cursor: pointer;
+      }
+
+      .notification-indicator {
+        position: absolute;
+        top: -5px;
+        right: -5px;
+        width: 12px;
+        height: 12px;
+        background-color: var(--danger-color);
+        border-radius: 50%;
+      }
+
+      .card {
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        padding: 20px;
+        margin-bottom: 20px;
+      }
+
+      .action-btn {
+        padding: 6px 12px;
+        border-radius: 4px;
+        font-size: 13px;
+        cursor: pointer;
+        border: none;
+      }
+
+      .edit-btn {
+        background-color: rgba(67, 97, 238, 0.1);
+        color: var(--primary-color);
+        margin-right: 5px;
+      }
+
+      .delete-btn {
+        background-color: rgba(248, 113, 113, 0.1);
+        color: var(--danger-color);
+      }
+
+      .btn {
+        padding: 10px 15px;
+        border-radius: 6px;
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+        border: none;
+        transition: all 0.2s ease;
+      }
+
+      .btn-primary {
+        background-color: var(--primary-color);
+        color: white;
+      }
+
+      .btn-primary:hover {
+        background-color: var(--secondary-color);
+      }
+
+      .btn-secondary {
+        background-color: #e5e7eb;
+        color: #4b5563;
+      }
+
+      .btn-secondary:hover {
+        background-color: #d1d5db;
+      }
+
+      .btn-success {
+        background-color: var(--success-color);
+        color: white;
+      }
+
+      .btn-danger {
+        background-color: var(--danger-color);
+        color: white;
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      .form-label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 500;
+        color: var(--text-dark);
+      }
+
+      .form-control {
+        width: 100%;
+        padding: 10px 15px;
+        border: 1px solid var(--border-color);
+        border-radius: 6px;
+        font-size: 14px;
+        transition: border-color 0.2s ease;
+      }
+
+      .form-control:focus {
+        outline: none;
+        border-color: var(--primary-color);
+      }
+
+      select.form-control {
+        appearance: none;
+        background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+        background-repeat: no-repeat;
+        background-position: right 15px center;
+        background-size: 15px;
+      }
+
+      textarea.form-control {
+        min-height: 100px;
+        resize: vertical;
+      }
+
+      .form-row {
+        display: flex;
+        gap: 15px;
+        margin-bottom: 20px;
+      }
+
+      .form-row .form-group {
+        flex: 1;
+        margin-bottom: 0;
+      }
+
+      .input-group {
+        display: flex;
+      }
+
+      .input-group .form-control:first-child {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+
+      .input-group-text {
+        display: flex;
+        align-items: center;
+        padding: 0 15px;
+        background-color: #f3f4f6;
+        border: 1px solid var(--border-color);
+        border-left: none;
+        border-top-right-radius: 6px;
+        border-bottom-right-radius: 6px;
+      }
+
+      .content-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+
+      .table-responsive {
+        overflow-x: auto;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      th,
+      td {
+        padding: 12px 15px;
+        text-align: left;
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      th {
+        font-weight: 600;
+        color: #6b7280;
+        font-size: 14px;
+      }
+
+      tbody tr:hover {
+        background-color: rgba(0, 0, 0, 0.01);
+      }
+
+      .table-actions {
+        display: flex;
+        gap: 5px;
+      }
+
+      .course-preview {
+        width: 280px;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        background-color: white;
+        margin: 0 auto;
+      }
+
+      .course-preview-img {
+        height: 160px;
+        background-color: #e2e8f0;
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .course-preview-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .course-badge {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background-color: #f87171;
+        color: white;
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 12px;
+        font-weight: 500;
+      }
+
+      .course-preview-content {
+        padding: 15px;
+      }
+
+      .course-category {
+        color: var(--primary-color);
+        font-size: 14px;
+        margin-bottom: 4px;
+      }
+
+      .course-rating {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        margin-bottom: 8px;
+      }
+
+      .course-rating i {
+        color: #fbbf24;
+      }
+
+      .course-title {
+        font-weight: 600;
+        margin-bottom: 8px;
+        font-size: 18px;
+      }
+
+      .course-instructor {
+        color: #6b7280;
+        font-size: 14px;
+        margin-bottom: 12px;
+      }
+
+      .course-meta {
+        display: flex;
+        justify-content: space-between;
+        font-size: 14px;
+        color: #6b7280;
+        padding-top: 12px;
+        border-top: 1px solid var(--border-color);
+      }
+
+      .course-meta div {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+
+      .course-price {
+        font-weight: 600;
+        color: var(--primary-color);
+        font-size: 18px;
+        margin-top: 12px;
+      }
+
+      .file-input-container {
+        position: relative;
+        overflow: hidden;
+        display: inline-block;
+      }
+
+      .file-input-container input[type='file'] {
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0;
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
+      }
+
+      .file-input-label {
+        display: inline-block;
+        padding: 10px 15px;
+        background-color: #f3f4f6;
+        border: 1px solid var(--border-color);
+        border-radius: 6px;
+        cursor: pointer;
+      }
+
+      .file-name {
+        display: inline-block;
+        margin-left: 10px;
+        font-size: 14px;
+      }
+
+      .hidden {
+        display: none;
+      }
+
+      .tabs {
+        display: flex;
+        border-bottom: 1px solid var(--border-color);
+        margin-bottom: 20px;
+      }
+
+      .tab {
+        padding: 10px 20px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        font-weight: 500;
+      }
+
+      .tab.active {
+        color: var(--primary-color);
+        border-bottom: 2px solid var(--primary-color);
+      }
+
+      .tab-content {
+        display: none;
+      }
+
+      .tab-content.active {
+        display: block;
+      }
+
+      .alert {
+        padding: 15px;
+        border-radius: 6px;
+        margin-bottom: 20px;
+      }
+
+      .alert-success {
+        background-color: rgba(74, 222, 128, 0.1);
+        border: 1px solid var(--success-color);
+        color: var(--success-color);
+      }
+
+      .alert-danger {
+        background-color: rgba(248, 113, 113, 0.1);
+        border: 1px solid var(--danger-color);
+        color: var(--danger-color);
+      }
+
+      @media screen and (max-width: 992px) {
+        .sidebar {
+          width: 80px;
+        }
+
+        .logo-text {
+          display: none;
+        }
+
+        .admin-info {
+          display: none;
+        }
+
+        .menu-category {
+          text-align: center;
+          padding: 10px 0;
+        }
+
+        .menu-item span {
+          display: none;
+        }
+
+        .menu-item {
+          justify-content: center;
+        }
+
+        .menu-item i {
+          margin-right: 0;
+        }
+
+        .main-content {
+          margin-left: 80px;
+        }
+      }
+
+      @media screen and (max-width: 768px) {
+        .menu-toggle {
+          display: block;
+        }
+
+        .sidebar {
+          transform: translateX(-100%);
+          z-index: 100;
+        }
+
+        .sidebar.active {
+          transform: translateX(0);
+        }
+
+        .main-content {
+          margin-left: 0;
+          width: 100%;
+        }
+
+        .form-row {
+          flex-direction: column;
+          gap: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="logo">
+          <i class="fas fa-graduation-cap"></i>
+          <span class="logo-text">LearnEase</span>
+        </div>
+        <div class="menu-toggle" id="sidebarToggle">
+          <i class="fas fa-bars"></i>
+        </div>
+      </div>
+
+      <div class="admin-info">
+        <div class="admin-avatar">
+          <i class="fas fa-user"></i>
+        </div>
+        <div class="admin-name">Admin User</div>
+        <div class="admin-role">Super Admin</div>
+      </div>
+
+      <div class="sidebar-menu">
+        <div class="menu-category">Main</div>
+        <div class="menu-item" data-page="dashboard">
+          <i class="fas fa-tachometer-alt"></i>
+          <a href="./index.html"><span>Dashboard</span></a>
+        </div>
+
+        <div class="menu-category">Content</div>
+        <div class="menu-item active" data-page="courses">
+          <i class="fas fa-book"></i>
+          <span>Courses</span>
+        </div>
+        <div class="menu-item" data-page="add-course">
+          <i class="fas fa-plus-circle"></i>
+          <span>Add Course</span>
+        </div>
+        <div class="menu-item" data-page="lessons">
+          <i class="fas fa-book-open"></i>
+          <span>Lessons</span>
+        </div>
+        <div class="menu-item" data-page="assignments">
+          <i class="fas fa-tasks"></i>
+          <span>Assignments</span>
+        </div>
+
+        <div class="menu-category">Users</div>
+        <div class="menu-item" data-page="users">
+          <i class="fas fa-users"></i>
+          <span>Users</span>
+        </div>
+        <div class="menu-item" data-page="instructors">
+          <i class="fas fa-user-tie"></i>
+          <span>Instructors</span>
+        </div>
+
+        <div class="menu-category">Sales</div>
+        <div class="menu-item" data-page="payments">
+          <i class="fas fa-credit-card"></i>
+          <span>Payments</span>
+        </div>
+
+        <div class="menu-category">Settings</div>
+        <div class="menu-item" data-page="settings">
+          <i class="fas fa-cog"></i>
+          <span>Settings</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content" id="mainContent">
+      <!-- Courses Page -->
+      <div class="page active" id="courses-page">
+        <div class="header">
+          <h1 class="page-title">Course Management</h1>
+          <div class="header-actions">
+            <div class="search-box">
+              <i class="fas fa-search"></i>
+              <input type="text" placeholder="Search courses..." />
+            </div>
+            <div class="notification-bell">
+              <i class="fas fa-bell"></i>
+              <div class="notification-indicator"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="content-header">
+          <h2>All Courses</h2>
+          <button class="btn btn-primary" id="showAddCoursePage">
+            <i class="fas fa-plus"></i> Add New Course
+          </button>
+        </div>
+
+        <div class="card">
+          <div class="table-responsive">
+            <table id="coursesTable">
+              <thead>
+                <tr>
+                  <th>Thumbnail</th>
+                  <th>Title</th>
+                  <th>Category</th>
+                  <th>Instructor</th>
+                  <th>Lessons</th>
+                  <th>Price</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <img
+                      src="/api/placeholder/60/40"
+                      alt="Course"
+                      style="
+                        border-radius: 4px;
+                        width: 60px;
+                        height: 40px;
+                        object-fit: cover;
+                      " />
+                  </td>
+                  <td>Complete Web Development Bootcamp</td>
+                  <td>Development</td>
+                  <td>Prof. Linda Clark</td>
+                  <td>75</td>
+                  <td>$49.99</td>
+                  <td>
+                    <span
+                      class="badge"
+                      style="
+                        background-color: rgba(74, 222, 128, 0.1);
+                        color: var(--success-color);
+                        padding: 4px 8px;
+                        border-radius: 4px;
+                      "
+                      >Published</span
+                    >
+                  </td>
+                  <td>
+                    <div class="table-actions">
+                      <button class="action-btn edit-btn">
+                        <i class="fas fa-edit"></i>
+                      </button>
+                      <button class="action-btn delete-btn">
+                        <i class="fas fa-trash"></i>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <img
+                      src="/api/placeholder/60/40"
+                      alt="Course"
+                      style="
+                        border-radius: 4px;
+                        width: 60px;
+                        height: 40px;
+                        object-fit: cover;
+                      " />
+                  </td>
+                  <td>UI/UX Design Fundamentals</td>
+                  <td>Design</td>
+                  <td>Sarah Johnson</td>
+                  <td>48</td>
+                  <td>$39.99</td>
+                  <td>
+                    <span
+                      class="badge"
+                      style="
+                        background-color: rgba(74, 222, 128, 0.1);
+                        color: var(--success-color);
+                        padding: 4px 8px;
+                        border-radius: 4px;
+                      "
+                      >Published</span
+                    >
+                  </td>
+                  <td>
+                    <div class="table-actions">
+                      <button class="action-btn edit-btn">
+                        <i class="fas fa-edit"></i>
+                      </button>
+                      <button class="action-btn delete-btn">
+                        <i class="fas fa-trash"></i>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <img
+                      src="/api/placeholder/60/40"
+                      alt="Course"
+                      style="
+                        border-radius: 4px;
+                        width: 60px;
+                        height: 40px;
+                        object-fit: cover;
+                      " />
+                  </td>
+                  <td>Data Science and Machine Learning</td>
+                  <td>Data Science</td>
+                  <td>Dr. Michael Brown</td>
+                  <td>92</td>
+                  <td>$89.99</td>
+                  <td>
+                    <span
+                      class="badge"
+                      style="
+                        background-color: rgba(251, 191, 36, 0.1);
+                        color: var(--warning-color);
+                        padding: 4px 8px;
+                        border-radius: 4px;
+                      "
+                      >Draft</span
+                    >
+                  </td>
+                  <td>
+                    <div class="table-actions">
+                      <button class="action-btn edit-btn">
+                        <i class="fas fa-edit"></i>
+                      </button>
+                      <button class="action-btn delete-btn">
+                        <i class="fas fa-trash"></i>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Add Course Page -->
+      <div class="page" id="add-course-page">
+        <div class="header">
+          <h1 class="page-title">Add New Course</h1>
+          <div class="header-actions">
+            <div class="search-box">
+              <i class="fas fa-search"></i>
+              <input type="text" placeholder="Search..." />
+            </div>
+            <div class="notification-bell">
+              <i class="fas fa-bell"></i>
+              <div class="notification-indicator"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="tabs">
+            <div class="tab active" data-tab="course-info">
+              Course Information
+            </div>
+            <div class="tab" data-tab="course-media">Media</div>
+            <div class="tab" data-tab="course-pricing">Pricing and Status</div>
+            <div class="tab" data-tab="course-preview">Preview</div>
+          </div>
+
+          <div id="alert-container"></div>
+
+          <form id="courseForm">
+            <!-- Course Information Tab -->
+            <div class="tab-content active" id="course-info-content">
+              <div class="form-group">
+                <label class="form-label" for="courseTitle"
+                  >Course Title*</label
+                >
+                <input
+                  type="text"
+                  id="courseTitle"
+                  name="course_title"
+                  class="form-control"
+                  placeholder="e.g. Complete Web Development Bootcamp"
+                  required />
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="courseCategory"
+                    >Category*</label
+                  >
+                  <select
+                    id="courseCategory"
+                    name="category"
+                    class="form-control"
+                    required>
+                    <option value="">Select a category</option>
+                    <option value="Development">Development</option>
+                    <option value="Design">Design</option>
+                    <option value="Business">Business</option>
+                    <option value="Marketing">Marketing</option>
+                    <option value="IT & Software">IT and Software</option>
+                    <option value="Data Science">Data Science</option>
+                    <option value="Languages">Languages</option>
+                    <option value="Health & Fitness">Health and Fitness</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="instructor">Instructor*</label>
+                  <input
+                    type="text"
+                    id="instructor"
+                    name="instructor"
+                    class="form-control"
+                    placeholder="e.g. Prof. Linda Clark"
+                    required />
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="totalLessons"
+                    >Total Lessons*</label
+                  >
+                  <input
+                    type="number"
+                    id="totalLessons"
+                    name="total_lesson"
+                    class="form-control"
+                    min="1"
+                    placeholder="e.g. 75"
+                    required />
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="courseDuration"
+                    >Course Duration*</label
+                  >
+                  <div style="display: flex; gap: 10px">
+                    <input
+                      type="number"
+                      id="durationHours"
+                      name="duration_hours"
+                      class="form-control"
+                      min="0"
+                      placeholder="Hours"
+                      required />
+                    <input
+                      type="number"
+                      id="durationMinutes"
+                      name="duration_minutes"
+                      class="form-control"
+                      min="0"
+                      max="59"
+                      placeholder="Minutes"
+                      required />
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="courseDescription"
+                  >Course Description*</label
+                >
+                <textarea
+                  id="courseDescription"
+                  name="description"
+                  class="form-control"
+                  rows="5"
+                  placeholder="Enter course description..."
+                  required></textarea>
+              </div>
+
+              <div class="form-group">
+                <button type="button" class="btn btn-primary" id="nextToMedia">
+                  Next: Media
+                </button>
+              </div>
+            </div>
+
+            <!-- Course Media Tab -->
+            <div class="tab-content" id="course-media-content">
+              <div class="form-group">
+                <label class="form-label">Course Thumbnail*</label>
+                <div class="file-input-container">
+                  <label class="file-input-label">
+                    <i class="fas fa-upload"></i> Choose File
+                    <input
+                      type="file"
+                      id="thumbnailUpload"
+                      name="thumbnail"
+                      accept="image/*" />
+                  </label>
+                  <span class="file-name" id="thumbnailFileName"
+                    >No file chosen</span
+                  >
+                </div>
+                <div
+                  id="thumbnailPreview"
+                  style="margin-top: 10px; max-width: 300px"></div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="courseBadge">Course Badge</label>
+                <select
+                  id="courseBadge"
+                  name="course_badge"
+                  class="form-control">
+                  <option value="">None</option>
+                  <option value="Bestseller">Bestseller</option>
+                  <option value="New">New</option>
+                  <option value="Hot">Hot</option>
+                  <option value="Popular">Popular</option>
+                  <option value="Featured">Featured</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <div class="form-row">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    id="backToInfo">
+                    Back
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    id="nextToPricing">
+                    Next: Pricing
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Course Pricing Tab -->
+            <div class="tab-content" id="course-pricing-content">
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="coursePrice"
+                    >Course Price*</label
+                  >
+                  <div class="input-group">
+                    <input
+                      type="number"
+                      id="coursePrice"
+                      name="course_price"
+                      class="form-control"
+                      min="0"
+                      step="0.01"
+                      placeholder="e.g. 49.99"
+                      required />
+                    <span class="input-group-text">$</span>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="courseRating"
+                    >Course Rating</label
+                  >
+                  <select
+                    id="courseRating"
+                    name="course_rating"
+                    class="form-control">
+                    <option value="">Not Rated</option>
+                    <option value="5.0">5.0</option>
+                    <option value="4.9">4.9</option>
+                    <option value="4.8">4.8</option>
+                    <option value="4.7">4.7</option>
+                    <option value="4.5">4.5</option>
+                    <option value="4.0">4.0</option>
+                    <option value="3.5">3.5</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="courseStatus"
+                  >Course Status*</label
+                >
+                <select
+                  id="courseStatus"
+                  name="course_status"
+                  class="form-control"
+                  required>
+                  <option value="">Select status</option>
+                  <option value="Published">Published</option>
+                  <option value="Draft">Draft</option>
+                  <option value="Pending">Pending Review</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <div class="form-row">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    id="backToMedia">
+                    Back
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-success"
+                    id="submitCourse">
+                    Create Course
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Course Preview Tab -->
+            <div class="tab-content" id="course-preview-content">
+              <div class="course-preview">
+                <div class="course-preview-img">
+                  <img
+                    id="previewThumbnail"
+                    src="#"
+                    alt="Course Thumbnail"
+                    style="display: none" />
+                  <div
+                    id="defaultThumbnail"
+                    style="
+                      width: 100%;
+                      height: 100%;
+                      background-color: #e2e8f0;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                    ">
+                    <i
+                      class="fas fa-image"
+                      style="font-size: 40px; color: #94a3b8"></i>
+                  </div>
+                  <div
+                    class="course-badge"
+                    id="previewBadge"
+                    style="display: none"></div>
+                </div>
+                <div class="course-preview-content">
+                  <div class="course-category" id="previewCategory">
+                    Category
+                  </div>
+                  <div class="course-title" id="previewTitle">Course Title</div>
+                  <div class="course-instructor" id="previewInstructor">
+                    Instructor Name
+                  </div>
+                  <div
+                    class="course-rating"
+                    id="previewRating"
+                    style="display: none">
+                    <i class="fas fa-star"></i>
+                    <span>5.0</span>
+                  </div>
+                  <div class="course-meta">
+                    <div>
+                      <i class="far fa-play-circle"></i>
+                      <span id="previewLessons">0</span> lessons
+                    </div>
+                    <div>
+                      <i class="far fa-clock"></i>
+                      <span id="previewDuration">0h 0m</span>
+                    </div>
+                  </div>
+                  <div class="course-price" id="previewPrice">$0.00</div>
+                </div>
+              </div>
+
+              <div class="form-group" style="margin-top: 20px">
+                <div class="form-row">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    id="backToPricing">
+                    Back
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-success"
+                    id="submitCourseFromPreview">
+                    Create Course
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <script>
+      // DOM elements
+      const sidebar = document.getElementById('sidebar');
+      const sidebarToggle = document.getElementById('sidebarToggle');
+      const showAddCoursePage = document.getElementById('showAddCoursePage');
+      const coursesPage = document.getElementById('courses-page');
+      const addCoursePage = document.getElementById('add-course-page');
+      const courseForm = document.getElementById('courseForm');
+      const alertContainer = document.getElementById('alert-container');
+
+      // Tab navigation elements
+      const tabs = document.querySelectorAll('.tab');
+      const tabContents = document.querySelectorAll('.tab-content');
+      const nextToMediaBtn = document.getElementById('nextToMedia');
+      const backToInfoBtn = document.getElementById('backToInfo');
+      const nextToPricingBtn = document.getElementById('nextToPricing');
+      const backToMediaBtn = document.getElementById('backToMedia');
+      const submitCourseBtn = document.getElementById('submitCourse');
+      const submitCourseFromPreviewBtn = document.getElementById(
+        'submitCourseFromPreview',
+      );
+
+      // Form input elements
+      const courseTitle = document.getElementById('courseTitle');
+      const courseCategory = document.getElementById('courseCategory');
+      const instructor = document.getElementById('instructor');
+      const totalLessons = document.getElementById('totalLessons');
+      const durationHours = document.getElementById('durationHours');
+      const durationMinutes = document.getElementById('durationMinutes');
+      const courseDescription = document.getElementById('courseDescription');
+      const thumbnailUpload = document.getElementById('thumbnailUpload');
+      const courseBadge = document.getElementById('courseBadge');
+      const coursePrice = document.getElementById('coursePrice');
+      const courseRating = document.getElementById('courseRating');
+      const courseStatus = document.getElementById('courseStatus');
+
+      // Preview elements
+      const previewThumbnail = document.getElementById('previewThumbnail');
+      const defaultThumbnail = document.getElementById('defaultThumbnail');
+      const previewBadge = document.getElementById('previewBadge');
+      const previewCategory = document.getElementById('previewCategory');
+      const previewTitle = document.getElementById('previewTitle');
+      const previewInstructor = document.getElementById('previewInstructor');
+      const previewRating = document.getElementById('previewRating');
+      const previewLessons = document.getElementById('previewLessons');
+      const previewDuration = document.getElementById('previewDuration');
+      const previewPrice = document.getElementById('previewPrice');
+
+      // Event Listeners
+      sidebarToggle.addEventListener('click', toggleSidebar);
+      showAddCoursePage.addEventListener('click', showAddCourse);
+
+      // Tab navigation
+      tabs.forEach((tab) => {
+        tab.addEventListener('click', switchTab);
+      });
+
+      nextToMediaBtn.addEventListener('click', () =>
+        validateAndSwitchTab('course-info', 'course-media'),
+      );
+      backToInfoBtn.addEventListener('click', () =>
+        switchTabManual('course-info'),
+      );
+      nextToPricingBtn.addEventListener('click', () =>
+        validateAndSwitchTab('course-media', 'course-pricing'),
+      );
+      backToMediaBtn.addEventListener('click', () =>
+        switchTabManual('course-media'),
+      );
+      submitCourseBtn.addEventListener('click', submitCourseForm);
+      submitCourseFromPreviewBtn.addEventListener('click', submitCourseForm);
+
+      // Form input changes
+      thumbnailUpload.addEventListener('change', handleThumbnailUpload);
+
+      // Preview updates
+      courseTitle.addEventListener('input', updatePreview);
+      courseCategory.addEventListener('change', updatePreview);
+      instructor.addEventListener('input', updatePreview);
+      totalLessons.addEventListener('input', updatePreview);
+      durationHours.addEventListener('input', updatePreview);
+      durationMinutes.addEventListener('input', updatePreview);
+      courseBadge.addEventListener('change', updatePreview);
+      coursePrice.addEventListener('input', updatePreview);
+      courseRating.addEventListener('change', updatePreview);
+
+      // Functions
+      function toggleSidebar() {
+        sidebar.classList.toggle('active');
+      }
+
+      function showAddCourse() {
+        coursesPage.classList.remove('active');
+        addCoursePage.classList.add('active');
+        switchTabManual('course-info');
+        courseForm.reset();
+        clearPreview();
+        clearAlerts();
+      }
+
+      function switchTab(e) {
+        const tabId = e.currentTarget.getAttribute('data-tab');
+        switchTabManual(tabId);
+      }
+
+      function switchTabManual(tabId) {
+        // Hide all tab contents
+        tabContents.forEach((content) => {
+          content.classList.remove('active');
+        });
+
+        // Deactivate all tabs
+        tabs.forEach((tab) => {
+          tab.classList.remove('active');
+        });
+
+        // Activate selected tab
+        const selectedTab = document.querySelector(`.tab[data-tab="${tabId}"]`);
+        const selectedContent = document.getElementById(`${tabId}-content`);
+
+        if (selectedTab && selectedContent) {
+          selectedTab.classList.add('active');
+          selectedContent.classList.add('active');
+
+          // If switching to preview tab, update all preview data
+          if (tabId === 'course-preview') {
+            updatePreview();
+          }
+        }
+      }
+
+      function validateAndSwitchTab(currentTab, nextTab) {
+        const currentContent = document.getElementById(`${currentTab}-content`);
+        const inputs = currentContent.querySelectorAll(
+          'input[required], select[required], textarea[required]',
+        );
+        let isValid = true;
+
+        inputs.forEach((input) => {
+          if (!input.value.trim()) {
+            isValid = false;
+            input.style.borderColor = 'var(--danger-color)';
+          } else {
+            input.style.borderColor = '';
+          }
+        });
+
+        if (isValid) {
+          switchTabManual(nextTab);
+        } else {
+          showAlert('Please fill in all required fields', 'danger');
+        }
+      }
+
+      function handleThumbnailUpload(e) {
+        const file = e.target.files[0];
+        if (file) {
+          const fileName = document.getElementById('thumbnailFileName');
+          fileName.textContent = file.name;
+
+          const reader = new FileReader();
+          reader.onload = function (event) {
+            const thumbnailPreview =
+              document.getElementById('thumbnailPreview');
+            thumbnailPreview.innerHTML = `<img src="${event.target.result}" style="max-width: 100%; border-radius: 6px;">`;
+
+            // Update preview thumbnail
+            previewThumbnail.src = event.target.result;
+            previewThumbnail.style.display = 'block';
+            defaultThumbnail.style.display = 'none';
+          };
+          reader.readAsDataURL(file);
+        }
+      }
+
+      function updatePreview() {
+        // Update basic info
+        previewTitle.textContent = courseTitle.value || 'Course Title';
+        previewCategory.textContent = courseCategory.value || 'Category';
+        previewInstructor.textContent = instructor.value || 'Instructor Name';
+        previewLessons.textContent = totalLessons.value || '0';
+
+        // Update duration
+        const hours = durationHours.value || '0';
+        const minutes = durationMinutes.value || '0';
+        previewDuration.textContent = `${hours}h ${minutes}m`;
+
+        // Update price
+        const price = parseFloat(coursePrice.value) || 0;
+        previewPrice.textContent = `$${price.toFixed(2)}`;
+
+        // Update rating
+        if (courseRating.value) {
+          previewRating.style.display = 'flex';
+          previewRating.querySelector('span').textContent = courseRating.value;
+        } else {
+          previewRating.style.display = 'none';
+        }
+
+        // Update badge
+        if (courseBadge.value) {
+          previewBadge.style.display = 'block';
+          previewBadge.textContent = courseBadge.value;
+        } else {
+          previewBadge.style.display = 'none';
+        }
+      }
+
+      function clearPreview() {
+        previewTitle.textContent = 'Course Title';
+        previewCategory.textContent = 'Category';
+        previewInstructor.textContent = 'Instructor Name';
+        previewLessons.textContent = '0';
+        previewDuration.textContent = '0h 0m';
+        previewPrice.textContent = '$0.00';
+        previewRating.style.display = 'none';
+        previewBadge.style.display = 'none';
+        previewThumbnail.style.display = 'none';
+        defaultThumbnail.style.display = 'flex';
+
+        // Reset thumbnail file name
+        document.getElementById('thumbnailFileName').textContent =
+          'No file chosen';
+        document.getElementById('thumbnailPreview').innerHTML = '';
+      }
+
+      function submitCourseForm() {
+        // Validate all required fields
+        const requiredInputs = courseForm.querySelectorAll('[required]');
+        let isValid = true;
+
+        requiredInputs.forEach((input) => {
+          if (!input.value.trim()) {
+            isValid = false;
+            input.style.borderColor = 'var(--danger-color)';
+          } else {
+            input.style.borderColor = '';
+          }
+        });
+
+        if (!isValid) {
+          showAlert('Please fill in all required fields', 'danger');
+          return;
+        }
+
+        // Create course object
+        const courseData = {
+          title: courseTitle.value,
+          category: courseCategory.value,
+          instructor: instructor.value,
+          total_lessons: parseInt(totalLessons.value),
+          duration: {
+            hours: parseInt(durationHours.value),
+            minutes: parseInt(durationMinutes.value),
+          },
+          description: courseDescription.value,
+          thumbnail: thumbnailUpload.files[0]
+            ? thumbnailUpload.files[0].name
+            : null,
+          badge: courseBadge.value || null,
+          price: parseFloat(coursePrice.value),
+          rating: courseRating.value || null,
+          status: courseStatus.value,
+          created_at: new Date().toISOString(),
+          updated_at: new Date().toISOString(),
+        };
+
+        // In a real application, you would send this data to a server
+        console.log('Course data to be submitted:', courseData);
+
+        // Show success message
+        showAlert('Course created successfully!', 'success');
+
+        // Reset form and switch back to courses page after 2 seconds
+        setTimeout(() => {
+          courseForm.reset();
+          clearPreview();
+          addCoursePage.classList.remove('active');
+          coursesPage.classList.add('active');
+          clearAlerts();
+
+          // In a real app, you would update the courses table here
+        }, 2000);
+      }
+
+      function showAlert(message, type) {
+        clearAlerts();
+
+        const alertDiv = document.createElement('div');
+        alertDiv.className = `alert alert-${type}`;
+        alertDiv.textContent = message;
+
+        alertContainer.appendChild(alertDiv);
+      }
+
+      function clearAlerts() {
+        while (alertContainer.firstChild) {
+          alertContainer.removeChild(alertContainer.firstChild);
+        }
+      }
+    </script>
+  </body>
+</html>

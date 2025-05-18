@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LearnEase</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/css/import.css" />
+    <link rel="stylesheet" href="/css/chatbot.css" />
+  </head>
+  <body>
+    <div class="loader" id="loader"></div>
+    <main class="con" id="con">
+      <!-- header section -->
+      <header>
+        <div class="ad">
+          <span class="ph"><i class="fa fa-phone"></i> +91 1234567890 </span>
+          <div class="social">
+            <span class="fol">Follow us on</span>
+            <a href="https://wa.me/9142555415/" target="_blank"
+              ><i class="fa-brands fa-whatsapp"></i
+            ></a>
+            <a href="https://www.facebook.com/" target="_blank"
+              ><i class="fa-brands fa-facebook"></i
+            ></a>
+            <a href="https://www.x.com/" target="_blank"
+              ><i class="fa-brands fa-x-twitter"></i
+            ></a>
+            <a href="https://www.instagram.com/" target="_blank"
+              ><i class="fa-brands fa-instagram"></i
+            ></a>
+            <a href="https://www.linkedin.com/" target="_blank"
+              ><i class="fab fa-linkedin-in"></i>
+            </a>
+          </div>
+        </div>
+        <div class="nav-bar">
+          <nav>
+            <h4>
+              <a href="/"><i class="fas fa-graduation-cap"></i> LearnEase</a>
+            </h4>
+            <div class="nav-links">
+              <a href="/">Home</a>
+              <a href="/courses">Courses</a>
+              <a
+                href="#"
+                onclick="window.scrollTo({top: '600', behavior:'smooth'})"
+                >Categories</a
+              >
+              <a href="/about">About</a>
+              <a href="/contact">Contact</a>
+            </div>
+            <div class="nav-item">
+              <div class="user-actions"></div>
+            </div>
+            <div class="nav-menu">
+              <div class="nav-btn">
+                <a href="/user/logout" target="_blank" class="btn btn-danger"
+                  >Logout</a
+                >
+              </div>
+              <div class="mode" id="mode">
+                <div class="mod-lo" id="modlo"></div>
+                <i class="fa-regular fa-moon" id="dark"></i>
+                <i class="fa-regular fa-sun" id="light"></i>
+              </div>
+              <input type="checkbox" id="menu-bar" />
+              <label for="menu-bar" class="menu" id="menu">
+                <div class="border top"></div>
+                <div class="border middle"></div>
+                <div class="border bottom"></div>
+              </label>
+            </div>
+          </nav>
+        </div>
+        <div class="t-container" id="toggle-bar">
+          <a href="/">Home</a>
+          <a href="/courses">Courses</a>
+          <a href="/categories">Categories</a>
+          <a href="/about">About</a>
+          <a href="/contact">Contact</a>
+        </div>
+      </header>
+      <div class="chatbot">
+        <i class="fa-solid fa-message"></i><span>Ask Nova</span>
+      </div>
+      <div class="chat-bg"></div>
+      <section class="chatbot-container">
+        <div class="app-container">
+          <div class="chat-interface">
+            <div class="header">
+              <div class="name"><p class="app-subtitle">Nova</p></div>
+              <div class="tools">
+                <div class="speaker">
+                  <i class="fa-solid fa-volume-high"></i>
+                </div>
+                <div class="clear">
+                  <i class="fa-solid fa-trash"></i>
+                </div>
+                <div class="close">
+                  <i class="fa-solid fa-xmark"></i>
+                </div>
+              </div>
+            </div>
+            <div class="chat-section" id="chat-section">
+              <div class="chat-empty-state" id="empty-state">
+                <i class="fas fa-microphone-alt empty-icon"></i>
+                <h3>Start a conversation</h3>
+              </div>
+              <div class="conversation-container" id="conversation"></div>
+            </div>
+            <div class="input-section">
+              <input
+                type="text"
+                id="input"
+                placeholder="Enter message here..." />
+              <div class="mic-button" id="mic-button">
+                <i class="fas fa-microphone"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="hero">
+        <div class="container">
+          <div class="hero-content">
+            <h1>Unlock Your Potential with <span>LearnEase</span></h1>
+            <p>
+              Access thousands of courses taught by industry experts and
+              transform your skills.
+            </p>
+            <div class="hero-buttons">
+              <a href="/courses" class="btn btn-primary">Explore Courses</a>
+              <a href="/user/register" target="_blank" class="btn btn-secondary"
+                >Join for Free</a
+              >
+            </div>
+          </div>
+          <div class="hero-image">
+            <img
+              src="https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?q=80&w=1474&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              alt="Learning Illustration" />
+          </div>
+        </div>
+      </section>
+      <section class="categories">
+        <div class="container">
+          <h2 class="section-title">Top Categories</h2>
+          <div class="category-grid">
+            <a href="/courses?category=Development" class="category-card">
+              <div class="category-icon"><i class="fas fa-code"></i></div>
+              <h3>Development</h3>
+              <p>250+ Courses</p>
+            </a>
+            <a href="/courses?category=Business" class="category-card">
+              <div class="category-icon"><i class="fas fa-chart-line"></i></div>
+              <h3>Business</h3>
+              <p>180+ Courses</p>
+            </a>
+            <a href="/courses?category=Design" class="category-card">
+              <div class="category-icon"><i class="fas fa-palette"></i></div>
+              <h3>Design</h3>
+              <p>120+ Courses</p>
+            </a>
+            <a href="/courses?category=Marketing" class="category-card">
+              <div class="category-icon"><i class="fas fa-bullhorn"></i></div>
+              <h3>Marketing</h3>
+              <p>95+ Courses</p>
+            </a>
+            <a href="/courses?category=Music" class="category-card">
+              <div class="category-icon"><i class="fas fa-music"></i></div>
+              <h3>Music</h3>
+              <p>75+ Courses</p>
+            </a>
+            <a href="/courses?category=Photography" class="category-card">
+              <div class="category-icon"><i class="fas fa-camera"></i></div>
+              <h3>Photography</h3>
+              <p>60+ Courses</p>
+            </a>
+          </div>
+        </div>
+      </section>
+      <section class="featured-courses">
+        <div class="container">
+          <div class="section-header">
+            <h2 class="section-title">Featured Courses</h2>
+            <a href="/courses" class="view-all">View All</a>
+          </div>
+          <div class="course-slider">
+            <div class="course-card">
+              <div class="course-image">
+                <img
+                  src="https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?q=80&w=1474&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                  alt="Course Thumbnail" />
+                <div class="course-badge">Bestseller</div>
+              </div>
+              <div class="course-content">
+                <div class="course-info">
+                  <span class="course-category">Development</span>
+                  <span class="course-rating"
+                    ><i class="fas fa-star"></i> 4.8</span
+                  >
+                </div>
+                <h3 class="course-title">Complete Web Development Bootcamp</h3>
+                <p class="course-instructor">By Prof. Linda Clark</p>
+                <div class="course-meta">
+                  <span><i class="fas fa-video"></i> 75 Lessons</span>
+                  <span><i class="fas fa-clock"></i> 12h 30m</span>
+                </div>
+                <div class="course-footer">
+                  <span class="course-price">$49.99</span>
+                  <a href="/user/register">View Details</a>
+                </div>
+              </div>
+            </div>
+            <div class="course-card">
+              <div class="course-image">
+                <img
+                  src="https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?q=80&w=1474&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                  alt="Course Thumbnail" />
+                <div class="course-badge">Bestseller</div>
+              </div>
+              <div class="course-content">
+                <div class="course-info">
+                  <span class="course-category">Development</span>
+                  <span class="course-rating"
+                    ><i class="fas fa-star"></i> 4.8</span
+                  >
+                </div>
+                <h3 class="course-title">
+                  Advanced JavaScript: From Fundamentals to Functional JS
+                </h3>
+                <p class="course-instructor">By John Smith</p>
+                <div class="course-meta">
+                  <span><i class="fas fa-video"></i> 35 Lessons</span>
+                  <span><i class="fas fa-clock"></i> 12h 30m</span>
+                </div>
+                <div class="course-footer">
+                  <span class="course-price">$29.99</span>
+                  <a href="/user/register">View Details</a>
+                </div>
+              </div>
+            </div>
+            <div class="course-card">
+              <div class="course-image">
+                <img
+                  src="https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?q=80&w=1474&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                  alt="Course Thumbnail" />
+                <div class="course-badge">Bestseller</div>
+              </div>
+              <div class="course-content">
+                <div class="course-info">
+                  <span class="course-category">Development</span>
+                  <span class="course-rating"
+                    ><i class="fas fa-star"></i> 4.7</span
+                  >
+                </div>
+                <h3 class="course-title">
+                  React: The Complete Guide (incl Hooks, Redux, Next.js)
+                </h3>
+                <p class="course-instructor">By John Smith</p>
+                <div class="course-meta">
+                  <span><i class="fas fa-video"></i> 55 Lessons</span>
+                  <span><i class="fas fa-clock"></i> 10h 30m</span>
+                </div>
+                <div class="course-footer">
+                  <span class="course-price">$39.99</span>
+                  <a href="/user/register">View Details</a>
+                </div>
+              </div>
+            </div>
+            <!-- More course cards would go here -->
+          </div>
+        </div>
+      </section>
+
+      <section class="testimonials">
+        <div class="container">
+          <h2 class="section-title">What Our Students Say</h2>
+          <div class="testimonial-slider">
+            <div class="testimonial-card">
+              <div class="testimonial-content">
+                <p>
+                  "LearnEase has completely transformed my career. The courses
+                  are comprehensive and the instructors are top-notch. I landed
+                  my dream job after completing just two courses!"
+                </p>
+              </div>
+              <div class="testimonial-author">
+                <div class="author-avatar">
+                  <img
+                    src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                    alt="Student Avatar" />
+                </div>
+                <div class="author-info">
+                  <h4>Sarah Johnson</h4>
+                  <p>Frontend Developer</p>
+                </div>
+              </div>
+            </div>
+            <div class="testimonial-card">
+              <div class="testimonial-content">
+                <p>
+                  "LearnEase has completely transformed my career. The courses
+                  are comprehensive and the instructors are top-notch. I landed
+                  my dream job after completing just two courses!"
+                </p>
+              </div>
+              <div class="testimonial-author">
+                <div class="author-avatar">
+                  <img
+                    src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                    alt="Student Avatar" />
+                </div>
+                <div class="author-info">
+                  <h4>Sarah Johnson</h4>
+                  <p>Frontend Developer</p>
+                </div>
+              </div>
+            </div>
+            <div class="testimonial-card">
+              <div class="testimonial-content">
+                <p>
+                  "LearnEase has completely transformed my career. The courses
+                  are comprehensive and the instructors are top-notch. I landed
+                  my dream job after completing just two courses!"
+                </p>
+              </div>
+              <div class="testimonial-author">
+                <div class="author-avatar">
+                  <img
+                    src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                    alt="Student Avatar" />
+                </div>
+                <div class="author-info">
+                  <h4>Sarah Johnson</h4>
+                  <p>Frontend Developer</p>
+                </div>
+              </div>
+            </div>
+            <!-- More testimonial cards would go here -->
+          </div>
+        </div>
+      </section>
+      <!-- Stats Section -->
+      <section class="stats-section">
+        <div class="container">
+          <div class="stats-grid">
+            <div class="stat-item">
+              <h3>1000+</h3>
+              <p>Courses Available</p>
+            </div>
+            <div class="stat-item">
+              <h3>10K+</h3>
+              <p>Active Students</p>
+            </div>
+            <div class="stat-item">
+              <h3>100+</h3>
+              <p>Expert Instructors</p>
+            </div>
+            <div class="stat-item">
+              <h3>10+</h3>
+              <p>Countries Reached</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="con-loader"></div>
+      <footer class="footer">
+        <div class="container">
+          <div class="footer-grid">
+            <div class="footer-column">
+              <h3 class="footer-logo">LearnEase</h3>
+              <p>
+                Our mission is to provide high-quality education that's
+                accessible to everyone, empowering learners worldwide to achieve
+                their goals.
+              </p>
+              <div class="social-links">
+                <a href="https://wa.me/9142555415/" target="_blank"
+                  ><i class="fa-brands fa-whatsapp"></i
+                ></a>
+                <a href="https://www.facebook.com/" target="_blank"
+                  ><i class="fa-brands fa-facebook"></i
+                ></a>
+                <a href="https://www.twitter.com/" target="_blank"
+                  ><i class="fa-brands fa-x-twitter"></i
+                ></a>
+                <a href="https://www.instagram.com/" target="_blank"
+                  ><i class="fa-brands fa-instagram"></i
+                ></a>
+                <a href="https://www.linkedin.com/" target="_blank"
+                  ><i class="fab fa-linkedin-in"></i>
+                </a>
+              </div>
+            </div>
+            <div class="footer-column">
+              <h4>Quick Links</h4>
+              <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/courses">Courses</a></li>
+                <li><a href="/about">About Us</a></li>
+                <li><a href="/contact">Contact</a></li>
+                <li><a href="/faq">FAQ</a></li>
+              </ul>
+            </div>
+            <div class="footer-column">
+              <h4>Categories</h4>
+              <ul>
+                <li><a href="/courses?category=Development">Development</a></li>
+                <li><a href="/courses?category=Business">Business</a></li>
+                <li><a href="/courses?category=Design">Design</a></li>
+                <li><a href="/courses?category=Marketing">Marketing</a></li>
+                <li><a href="/courses?category=Music">Music</a></li>
+              </ul>
+            </div>
+            <div class="footer-column">
+              <h4>Contact Us</h4>
+              <ul class="contact-info">
+                <li>
+                  <i class="fas fa-map-marker-alt"></i>
+                  <span>123 Education St, Learning City</span>
+                </li>
+                <li>
+                  <i class="fas fa-phone"></i>
+                  <span>+91 (555) 123-4567</span>
+                </li>
+                <li>
+                  <i class="fas fa-envelope"></i>
+                  <span>contact@learnease.com</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="footer-divider"></div>
+          <div class="footer-grid">
+            <div class="footer-column">
+              <h4>Idea and Designed By</h4>
+              <ul class="contact-info">
+                <li>
+                  <i class="fa-solid fa-user-tie"></i>
+                  <span>Ankit Kumar Sen</span>
+                </li>
+                <li>
+                  <i class="fas fa-phone"></i>
+                  <span>+91 (555) 123-4567</span>
+                </li>
+                <li>
+                  <i class="fas fa-envelope"></i>
+                  <span>contact@gmail.com</span>
+                </li>
+              </ul>
+            </div>
+            <div class="footer-column">
+              <h4>Developed By</h4>
+              <ul class="contact-info">
+                <li>
+                  <i class="fa-solid fa-user-tie"></i>
+                  <span>Abhishek Kumar</span>
+                </li>
+                <li>
+                  <i class="fas fa-phone"></i>
+                  <span>+91 (555) 123-4567</span>
+                </li>
+                <li>
+                  <i class="fas fa-envelope"></i>
+                  <span>contact@gmail.com</span>
+                </li>
+              </ul>
+            </div>
+            <div class="footer-column">
+              <h4>All Team Members</h4>
+              <ul class="contact-info">
+                <li class="team-member">
+                  <i class="fa-solid fa-arrow-right"></i>
+                  <span>Aryan Kumar</span>
+                </li>
+                <li class="team-member">
+                  <i class="fa-solid fa-arrow-right"></i>
+                  <span>Sonam Kumari</span>
+                </li>
+                <li class="team-member">
+                  <i class="fa-solid fa-arrow-right"></i>
+                  <span>Mantu Kumar</span>
+                </li>
+                <li class="team-member">
+                  <i class="fa-solid fa-arrow-right"></i>
+                  <span>Ankush Kumar</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="footer-divider"></div>
+          <div class="footer-bottom">
+            <p class="copyright">&copy; 2025 LearnEase. All rights reserved.</p>
+            <div class="footer-links">
+              <a href="/privacy">Privacy Policy</a>
+              <a href="/terms">Terms of Service</a>
+              <a href="/cookies">Cookie Policy</a>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </main>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        var loader = document.getElementById('loader');
+        var content = document.getElementById('con');
+        setTimeout(function () {
+          loader.style.display = 'none';
+          content.style.display = 'block';
+          setTimeout(function () {
+            content.style.opacity = 1;
+          }, 50);
+        }, 1000);
+      });
+    </script>
+    <script src="/js/mode.js"></script>
+    <script src="/js/nav.js"></script>
+    <script src="/js/chatbot.js"></script>
+  </body>
+</html>

@@ -2,6 +2,7 @@ const dark = document.getElementById('dark');
 const light = document.getElementById('light');
 const head = document.querySelector('head');
 const link = document.createElement('link');
+
 dark.style.lineHeight = '36px';
 light.style.lineHeight = '36px';
 

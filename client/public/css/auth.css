@@ -282,16 +282,17 @@ input.success {
 /* Toast notification */
 .toast {
   position: fixed;
-  bottom: 20px;
-  right: 20px;
+  top: 8.3rem;
+  right: 5px;
   padding: 1rem;
-  border-radius: 4px;
+  border-radius: 5px;
   color: white;
   font-weight: 500;
   max-width: 300px;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
   transform: translateX(150%);
   transition: transform 0.3s ease;
+  z-index: 9;
 }
 
 .toast.show {

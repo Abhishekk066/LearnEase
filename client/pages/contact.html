@@ -77,6 +77,14 @@
           <a href="/courses">Courses</a>
           <a href="/about">About</a>
           <a href="/contact">Contact</a>
+          <div class="nav-btn">
+            <a href="/user/login" target="_blank" class="btn btn-primary"
+              >Login</a
+            >
+            <a href="/user/register" target="_blank" class="btn btn-secondary"
+              >Register</a
+            >
+          </div>
         </div>
       </header>
       <div class="container">
@@ -103,7 +111,6 @@
                 </p>
               </div>
             </div>
-
             <div class="info-item">
               <i class="fas fa-phone"></i>
               <div>
@@ -142,7 +149,6 @@
               </div>
             </div>
           </div>
-
           <div class="contact-form">
             <h3>Send us a Message</h3>
             <form id="contactForm">
@@ -181,12 +187,14 @@
                   required></textarea>
               </div>
               <div class="hero-buttons">
-                <button class="btn btn-primary">Send Message</button>
+                <button class="btn btn-primary" id="send-btn">
+                  Send Message
+                </button>
               </div>
             </form>
           </div>
         </div>
-
+        <div class="toast" id="toast"></div>
         <!-- FAQ Section -->
         <div class="faq-section">
           <h2>Frequently Asked Questions</h2>

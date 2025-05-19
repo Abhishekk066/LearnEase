@@ -86,10 +86,6 @@ sendMail.post('/sendmail', (req, res) => {
       html: htmlContent,
     };
 
-    console.log(mailOptions);
-    console.log(message);
-    console.log(message.replace(/^\n+/, ''));
-
     transporter.sendMail(mailOptions, (error, info) => {
       if (error) {
         console.error('Error sending email:', error);

@@ -1,6 +1,5 @@
 input[type='checkbox'],
 .menu {
-  margin-top: 16px;
   height: 30px;
   width: 35px;
   cursor: pointer;
@@ -35,8 +34,8 @@ input[type='checkbox'],
 }
 
 .t-container {
-  width: 12rem;
-  height: 17.5rem;
+  width: fit-content;
+  height: fit-content;
   background: linear-gradient(to bottom, var(--dark-bg), var(--darker-bg));
   user-select: none;
   z-index: 99999;
@@ -46,6 +45,7 @@ input[type='checkbox'],
   flex-direction: column;
   align-items: center;
   border-radius: 5px;
+  min-width: 12rem;
 }
 
 .t-container a {
@@ -56,7 +56,7 @@ input[type='checkbox'],
   border-radius: 10px;
   transition: var(--transition);
   border-radius: 5px;
-  width: fit-content;
+  text-align: center;
 }
 
 .t-container a:hover {

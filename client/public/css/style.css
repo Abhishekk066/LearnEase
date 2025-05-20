@@ -64,7 +64,7 @@ body {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -60%);
-  z-index: 9999;
+  z-index: 999;
   display: none;
 }
 
@@ -187,13 +187,21 @@ ul {
 
 .user-actions {
   display: flex;
+  justify-content: space-around;
   align-items: center;
+}
+
+.t-container .user-actions {
+  margin: 1.2rem 0 0.6rem;
+}
+
+.t-container .user-profile img {
+  margin-right: 10px;
 }
 
 .user-profile {
   display: flex;
   align-items: center;
-  margin-left: 20px;
   cursor: pointer;
 }
 

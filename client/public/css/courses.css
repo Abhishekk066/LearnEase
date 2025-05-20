@@ -1,6 +1,7 @@
 .nav-bar nav .nav-links a:first-child {
   border-bottom: none;
   padding: 2px;
+  margin-right: 10px;
 }
 
 .nav-bar nav .nav-links a:nth-child(2):after {

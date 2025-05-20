@@ -9,10 +9,6 @@ auth.use(cookieParser());
 auth.use(express.json());
 auth.use('/pages', express.static(path.join(__dirname, '../../client/pages')));
 
-auth.get('/user/register', (req, res) => {
-  res.sendFile(path.join(__dirname, '../../client/pages/register.html'));
-});
-
 auth.get('/', (req, res) => {
   const username = req.cookies.username;
   if (!username) {
@@ -43,6 +39,19 @@ auth.post('/auth', (req, res) => {
 });
 
 //register users
+auth.get('/user/register', (req, res) => {
+  const username = req.cookies.username;
+  if (!username) {
+    return res.sendFile(
+      path.join(__dirname, '../../client/pages/register.html'),
+    );
+  }
+
+  if (username) {
+    return res.redirect('/');
+  }
+});
+
 auth.post('/register', async (req, res) => {
   try {
     const { firstname, lastname, email, mobile, address, password } = req.body;
@@ -63,7 +72,7 @@ auth.post('/register', async (req, res) => {
       time,
     };
 
-    const newdata = await new DatabaseUser(formData).save();
+    await new DatabaseUser(formData).save();
     res.status(200).json({ message: 'Data saved successfully' });
   } catch (error) {
     console.error('Error:', error);
@@ -73,7 +82,14 @@ auth.post('/register', async (req, res) => {
 
 //login user
 auth.get('/user/login', (req, res) => {
-  res.sendFile(path.join(__dirname, '../../client/pages/login.html'));
+  const username = req.cookies.username;
+  if (!username) {
+    return res.sendFile(path.join(__dirname, '../../client/pages/login.html'));
+  }
+
+  if (username) {
+    return res.redirect('/');
+  }
 });
 
 auth.post('/login', async (req, res) => {

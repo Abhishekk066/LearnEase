@@ -27,16 +27,6 @@ const addressError = document.getElementById('add-error');
 const passwordError = document.getElementById('pass-error');
 const confirmPassError = document.getElementById('confirm-pass-error');
 
-document.addEventListener('DOMContentLoaded', function () {
-  setTimeout(function () {
-    loader.style.display = 'none';
-    content.style.display = 'block';
-    setTimeout(function () {
-      content.style.opacity = 1;
-    }, 50);
-  }, 1000);
-});
-
 const passwordHideView = (id, selector) => {
   let isClick = false;
   selector.addEventListener('click', () => {
@@ -263,13 +253,3 @@ form.addEventListener('submit', async (e) => {
     showToast('Please Fill all the Field', 'error');
   }
 });
-
-const getData = async () => {
-  try {
-    const res = await fetch('/user');
-    const data = await res.json();
-    console.log(data);
-  } catch (err) {
-    console.error('Fetching users failed:', err);
-  }
-};

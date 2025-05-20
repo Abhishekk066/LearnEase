@@ -42,37 +42,46 @@
         <div class="nav-bar">
           <nav>
             <h4>
-              <a href="/"> <i class="fas fa-graduation-cap"></i> LearnEase</a>
+              <a href="/"><i class="fas fa-graduation-cap"></i> LearnEase</a>
             </h4>
             <div class="nav-links">
               <a href="/">Home</a>
               <a href="/courses">Courses</a>
               <a
                 href="#"
-                onclick="window.scrollTo({top: '600', behavior:'smooth'})"
+                onclick="window.scrollTo({top: '520', behavior:'smooth'})"
                 >Categories</a
               >
               <a href="/about">About</a>
               <a href="/contact">Contact</a>
             </div>
-            <div class="nav-item"></div>
+            <div class="nav-item">
+              <div class="user-actions"></div>
+            </div>
             <div class="nav-menu">
-              <div class="nav-btn">
-                <a href="/user/login" target="_blank" class="btn btn-primary"
-                  >Login</a
-                >
-                <a
-                  href="/user/register"
-                  target="_blank"
-                  class="btn btn-secondary"
-                  >Register</a
-                >
-              </div>
               <div class="mode" id="mode">
                 <div class="mod-lo" id="modlo"></div>
                 <i class="fa-regular fa-moon" id="dark"></i>
                 <i class="fa-regular fa-sun" id="light"></i>
               </div>
+              <div class="nav-btn"></div>
+              <select class="language hidden">
+                <option value="en" selected>English</option>
+                <option value="hi">Hindi</option>
+                <option value="bn">Bengali</option>
+                <option value="bho">Bhojpuri</option>
+                <option value="mr">Marathi</option>
+                <option value="gu">Gujarati</option>
+                <option value="ta">Tamil</option>
+                <option value="es">Spanish</option>
+                <option value="fr">French</option>
+                <option value="ru">Russian</option>
+                <option value="de">German</option>
+                <option value="zh-CN">Chinese</option>
+              </select>
+              <div
+                id="google_translate_element"
+                style="display: none !important"></div>
               <input type="checkbox" id="menu-bar" />
               <label for="menu-bar" class="menu" id="menu">
                 <div class="border top"></div>
@@ -85,6 +94,9 @@
         <div class="t-container" id="toggle-bar">
           <a href="/">Home</a>
           <a href="/courses">Courses</a>
+          <a href="#" onclick="window.scrollTo({top: '480', behavior:'smooth'})"
+            >Categories</a
+          >
           <a href="/about">About</a>
           <a href="/contact">Contact</a>
           <div class="nav-btn">
@@ -94,6 +106,22 @@
             <a href="/user/register" target="_blank" class="btn btn-secondary"
               >Register</a
             >
+          </div>
+          <div class="lang">
+            <select class="language">
+              <option value="en" selected>English</option>
+              <option value="hi">Hindi</option>
+              <option value="bn">Bengali</option>
+              <option value="bho">Bhojpuri</option>
+              <option value="mr">Marathi</option>
+              <option value="gu">Gujarati</option>
+              <option value="ta">Tamil</option>
+              <option value="es">Spanish</option>
+              <option value="fr">French</option>
+              <option value="ru">Russian</option>
+              <option value="de">German</option>
+              <option value="zh-CN">Chinese</option>
+            </select>
           </div>
         </div>
       </header>
@@ -290,7 +318,6 @@
           </div>
         </div>
       </section>
-
       <section class="testimonials">
         <div class="container">
           <h2 class="section-title">What Our Students Say</h2>
@@ -318,40 +345,38 @@
             <div class="testimonial-card">
               <div class="testimonial-content">
                 <p>
-                  "LearnEase has completely transformed my career. The courses
-                  are comprehensive and the instructors are top-notch. I landed
-                  my dream job after completing just two courses!"
+                  "Thanks to LearnEase, I was able to switch careers into UX
+                  design. The real-world projects and portfolio tips were
+                  exactly what I needed to break into the industry."
                 </p>
               </div>
               <div class="testimonial-author">
                 <div class="author-avatar">
                   <img
-                    src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                    src="https://images.unsplash.com/photo-1595152772835-219674b2a8a6?q=80&w=1374&auto=format&fit=crop"
                     alt="Student Avatar" />
                 </div>
                 <div class="author-info">
-                  <h4>Sarah Johnson</h4>
-                  <p>Frontend Developer</p>
+                  <h4>David Lee</h4>
+                  <p>UX Designer</p>
                 </div>
               </div>
             </div>
             <div class="testimonial-card">
               <div class="testimonial-content">
                 <p>
-                  "LearnEase has completely transformed my career. The courses
-                  are comprehensive and the instructors are top-notch. I landed
-                  my dream job after completing just two courses!"
+                  "I never thought learning online could be this effective.
+                  LearnEase's courses helped me start my freelance photography
+                  business with confidence and skill."
                 </p>
               </div>
               <div class="testimonial-author">
                 <div class="author-avatar">
-                  <img
-                    src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                    alt="Student Avatar" />
+                  <img src="/img/user.png" alt="Student Avatar" />
                 </div>
                 <div class="author-info">
-                  <h4>Sarah Johnson</h4>
-                  <p>Frontend Developer</p>
+                  <h4>Emily Carter</h4>
+                  <p>Photographer</p>
                 </div>
               </div>
             </div>
@@ -393,7 +418,6 @@
           </div>
         </div>
       </section>
-      <div class="con-loader"></div>
       <footer class="footer">
         <div class="container">
           <div class="footer-grid">
@@ -531,18 +555,21 @@
       </footer>
     </main>
     <script>
-      document.addEventListener('DOMContentLoaded', function () {
-        var loader = document.getElementById('loader');
-        var content = document.getElementById('con');
-        setTimeout(function () {
-          loader.style.display = 'none';
-          content.style.display = 'block';
-          setTimeout(function () {
-            content.style.opacity = 1;
-          }, 50);
-        }, 1000);
-      });
+      function googleTranslateElementInit() {
+        new google.translate.TranslateElement(
+          {
+            pageLanguage: 'en',
+            autoDisplay: false,
+          },
+          'google_translate_element',
+        );
+      }
     </script>
+    <script
+      type="text/javascript"
+      src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <script src="/js/lang.js"></script>
+    <script src="/js/loader.js"></script>
     <script src="/js/mode.js"></script>
     <script src="/js/nav.js"></script>
     <script src="/js/chatbot.js"></script>

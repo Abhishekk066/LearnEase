@@ -9,9 +9,6 @@
   .nav-item {
     display: none;
   }
-  .mode {
-    margin-right: 15px;
-  }
 }
 
 @media (max-width: 640px) {
@@ -27,6 +24,10 @@
 
   .nav-menu .nav-btn {
     display: none;
+  }
+
+  .hidden {
+    display: none !important;
   }
 }
 
@@ -52,6 +53,10 @@
     height: 6rem;
   }
 
+  .mode {
+    margin-right: 8px;
+  }
+
   .nav-bar nav {
     top: 5rem;
   }
@@ -61,10 +66,6 @@
 
   footer .f-logo {
     text-align: center;
-  }
-
-  .mode {
-    margin-right: 5px;
   }
 }
 
@@ -102,6 +103,10 @@
 @media (max-width: 768px) {
   .container {
     max-width: 540px;
+  }
+
+  .hidden {
+    display: block;
   }
 
   .navbar {
@@ -215,9 +220,8 @@
   }
 
   .categories,
-  .featured-courses,
   .testimonials {
-    padding: 3rem 0;
+    padding: 2rem 0;
   }
 
   .cta {

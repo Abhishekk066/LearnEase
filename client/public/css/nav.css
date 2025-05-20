@@ -4,9 +4,11 @@
 }
 
 .ad {
+  position: relative;
   width: 100%;
   height: 40px;
   background: var(--adder-bg);
+  z-index: 9999 !important;
 }
 
 .ad .ph i {
@@ -71,6 +73,9 @@
 }
 
 .nav-bar nav h4 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-size: 24px;
   text-transform: capitalize;
   cursor: pointer;
@@ -213,14 +218,17 @@
 .nav-menu {
   display: flex;
   flex-direction: row;
-  justify-content: flex-end;
+  justify-content: space-around;
+  align-items: center;
+}
+.hidden {
+  display: block;
 }
 
 .mode {
   width: 35px;
   height: 35px;
-  margin-top: 14px;
-  margin-right: 5px;
+  margin-right: 6px;
   text-align: center;
   font-size: 25px;
   border-radius: 10rem;
@@ -240,4 +248,99 @@
 
 #light {
   display: none;
+}
+
+.lang {
+  margin-bottom: 1rem;
+}
+
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: var(--light-bg-color);
+  color: var(--darker-color);
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 0.5rem 0.8rem 0.5rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 20px;
+  width: fit-content;
+}
+
+.dark select {
+  color: var(--light-color);
+}
+
+select::-ms-expand {
+  display: none;
+}
+
+.goog-te-banner-frame {
+  display: none !important;
+}
+.goog-te-menu-value:hover {
+  text-decoration: none !important;
+}
+.goog-tooltip {
+  display: none !important;
+}
+.goog-tooltip:hover {
+  display: none !important;
+}
+.goog-text-highlight {
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+body {
+  top: 0 !important;
+  position: static !important;
+}
+
+iframe.goog-te-banner-frame {
+  display: none !important;
+}
+
+.skiptranslate {
+  display: none !important;
+}
+
+.goog-te-gadget {
+  height: 0px !important;
+  overflow: hidden !important;
+}
+
+.goog-te-menu-frame {
+  box-shadow: none !important;
+}
+
+#goog-gt-tt {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  background: transparent !important;
+  color: transparent !important;
+}
+
+/* Prevent text height changes on hover with Google Translate */
+.VIpqJd-yAWNEb-VIpgJd-fmcmS-sn54Q,
+.VIpqJd-yAWNEb-VIpgJd-fmcmS,
+.VIpqJd-yAWNEb-VIpgJd-fmcmS-sn54Q *,
+.goog-text-highlight {
+  transform: none !important;
+  -webkit-transform: none !important;
+  text-shadow: none !important;
+  box-shadow: none !important;
+  height: auto !important;
+  line-height: inherit !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  vertical-align: baseline !important;
+  border: none !important;
+  font-size: inherit !important;
+  transition: none !important;
 }

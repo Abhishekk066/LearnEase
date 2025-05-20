@@ -4,8 +4,8 @@ const ad = document.querySelector('.ad');
 const toggle = document.getElementById('toggle-bar');
 const navBtn = document.querySelectorAll('.nav-btn');
 const userAction = document.querySelectorAll('.user-actions');
-const tContainer = document.querySelector('.t-container');
-const main = document.querySelector('main');
+const tContainer = document.querySelector('.t-container ');
+
 async function isAuthorised() {
   try {
     const response = await fetch('/auth', {
@@ -73,13 +73,13 @@ const adder = () => {
   if (window.scrollY > value) {
     nav.style.top = '0';
     nav.style.position = 'fixed';
-    main.style.marginTop = tvalue;
+    document.body.style.marginTop = tvalue;
     tContainer.style.top = '3.8rem';
     ad.style.display = 'none';
   } else {
     nav.style.top = '';
     nav.style.position = '';
-    main.style.marginTop = '';
+    document.body.style.marginTop = '';
     tContainer.style.top = tvalue;
     ad.style.display = '';
   }
@@ -89,7 +89,8 @@ window.addEventListener('resize', adder);
 adder();
 
 if (checkbox) {
-  checkbox.addEventListener('change', () => {
+  checkbox.addEventListener('change', (e) => {
+    e.stopPropagation();
     if (checkbox.checked) {
       toggle.style.transition = 'all 0.5s ease';
       toggle.style.right = '0';

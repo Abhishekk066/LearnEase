@@ -73,7 +73,7 @@ const adder = () => {
   if (window.scrollY > value) {
     nav.style.top = '0';
     nav.style.position = 'fixed';
-    main.style.marginTop = '3.8rem';
+    main.style.marginTop = tvalue;
     tContainer.style.top = '3.8rem';
     ad.style.display = 'none';
   } else {

@@ -4,8 +4,8 @@ const ad = document.querySelector('.ad');
 const toggle = document.getElementById('toggle-bar');
 const navBtn = document.querySelectorAll('.nav-btn');
 const userAction = document.querySelectorAll('.user-actions');
-const tContainer = document.querySelector('.t-container ');
-
+const tContainer = document.querySelector('.t-container');
+const main = document.querySelector('main');
 async function isAuthorised() {
   try {
     const response = await fetch('/auth', {
@@ -73,13 +73,13 @@ const adder = () => {
   if (window.scrollY > value) {
     nav.style.top = '0';
     nav.style.position = 'fixed';
-    document.body.style.marginTop = '3.8rem';
+    main.style.marginTop = '3.8rem';
     tContainer.style.top = '3.8rem';
     ad.style.display = 'none';
   } else {
     nav.style.top = '';
     nav.style.position = '';
-    document.body.style.marginTop = '';
+    main.style.marginTop = '';
     tContainer.style.top = tvalue;
     ad.style.display = '';
   }

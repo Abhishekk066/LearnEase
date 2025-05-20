@@ -75,13 +75,11 @@ const adder = () => {
     nav.style.position = 'fixed';
     document.body.style.marginTop = '3.8rem';
     tContainer.style.top = '3.8rem';
-    ad.style.display = 'none';
   } else {
     nav.style.top = '';
     nav.style.position = '';
     document.body.style.marginTop = '';
     tContainer.style.top = tvalue;
-    ad.style.display = '';
   }
 };
 window.addEventListener('scroll', adder);

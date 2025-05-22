@@ -327,6 +327,7 @@ iframe.goog-te-banner-frame {
 }
 
 font {
+  background: none !important;
   transform: none !important;
   -webkit-transform: none !important;
   text-shadow: none !important;

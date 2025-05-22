@@ -326,11 +326,7 @@ iframe.goog-te-banner-frame {
   color: transparent !important;
 }
 
-/* Prevent text height changes on hover with Google Translate */
-.VIpqJd-yAWNEb-VIpgJd-fmcmS-sn54Q,
-.VIpqJd-yAWNEb-VIpgJd-fmcmS,
-.VIpqJd-yAWNEb-VIpgJd-fmcmS-sn54Q *,
-.goog-text-highlight {
+font {
   transform: none !important;
   -webkit-transform: none !important;
   text-shadow: none !important;

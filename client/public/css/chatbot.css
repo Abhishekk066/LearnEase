@@ -1,3 +1,7 @@
+.chatbot-container {
+  z-index: 999999;
+}
+
 .app-container {
   max-width: 450px;
   width: 100%;
@@ -9,9 +13,13 @@
   border-radius: 24px;
   box-shadow: 0 0 0 2px rgba(67, 98, 238, 0.2);
   width: 85%;
-  height: 60vh;
-  max-height: 60vh;
-  z-index:9999999999999;
+  height: 28rem;
+  max-height: 28rem;
+}
+
+.chat-bubble ul {
+  list-style-type: inherit;
+  padding: 20px;
 }
 
 .chat-interface {
@@ -174,6 +182,7 @@
   color: var(--dark);
   border-top-left-radius: 4px;
   align-self: flex-start;
+  width: 100%;
 }
 
 .input-section {

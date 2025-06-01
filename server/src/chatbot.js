@@ -1,25 +1,32 @@
-require('dotenv').config();
-const express = require('express');
-const path = require('path');
-const fetch = require('node-fetch');
+require("dotenv").config();
+const express = require("express");
+const path = require("path");
+const { marked } = require("marked");
 const chatBot = express.Router();
 
-chatBot.use(express.static(path.join(__dirname, 'public')));
+chatBot.use(express.static(path.join(__dirname, "public")));
 chatBot.use(express.json());
 
-chatBot.post('/chat', async (req, res) => {
+chatBot.post("/chat", async (req, res) => {
   const { prompt } = req.body;
   const API_KEY = process.env.GEMINI_API_KEY;
 
   if (!API_KEY) {
-    return res.status(500).json({ error: 'API key is not configured' });
+    return res.status(500).json({ error: "API key is not configured" });
   }
 
   const body = {
     system_instruction: {
       parts: [
         {
-          text: `You are Nova, a friendly and helpful AI assistant for LearnEase also act as female assistant, a platform offering courses in Development, Business, Design, Marketing, Music, and Photography. LearnEase was created by developer Abhishek, who built both the frontend and backend. The idea for LearnEase came from Ankit Kumar Sen. You, Nova, were also created by Abhishek to assist users in discovering the right courses based on their interests and goals.
+          text: `You are Nova, a friendly and helpful AI assistant for LearnEase also act as female assistant, a platform offering courses in Development, Business, Design, Marketing, Music, and Photography. Here all links of courses  <li><a href="/courses?category=Development">Development</a></li>
+- <a href="/courses?category=Development">Development</a>
+- <a href="/courses?category=Business">Business</a>
+- <a href="/courses?category=Design">Design</a>
+- <a href="/courses?category=Marketing">Marketing</a>
+- <a href="/courses?category=Music">Music</a>
+- <a href="/courses?category=Photography">Photography</a>
+LearnEase was created by developer Abhishek, who built both the frontend and backend. The idea for LearnEase came from Ankit Kumar Sen. You, Nova, were also created by Abhishek to assist users in discovering the right courses based on their interests and goals.
 
 Always respond in a way that directly addresses the user's actual question or message. Match both the content and intent of what the user is asking. Keep your replies useful and focused.
 
@@ -40,12 +47,12 @@ Maintain a tone that is warm, clear, and supportive. Your purpose is to make lea
     const response = await fetch(
       `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${API_KEY}`,
       {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(body),
-      },
+      }
     );
 
     const result = await response.json();
@@ -56,10 +63,19 @@ Maintain a tone that is warm, clear, and supportive. Your purpose is to make lea
 
     const message =
       result.candidates?.[0]?.content?.parts?.[0]?.text ||
-      'Sorry, I could not generate a response.';
-    res.json({ message });
+      "Sorry, I could not generate a response.";
+
+    const speech = message
+      .replace(
+        /([\u2700-\u27BF]|[\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|\uD83E[\uDD00-\uDDFF])/g,
+        ""
+      )
+      .replace(/[^a-zA-Z\s,\.?!]/g, "");
+    const html = marked.parse(message);
+
+    res.json({ html, speech });
   } catch (error) {
-    console.error('API error:', error);
+    console.error("API error:", error);
     res.status(500).json({ error: error.message });
   }
 });

@@ -11,6 +11,7 @@
   width: 85%;
   height: 60vh;
   max-height: 60vh;
+  z-index:9999999999999;
 }
 
 .chat-interface {

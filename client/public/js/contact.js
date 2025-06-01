@@ -46,7 +46,6 @@ contactForm.addEventListener('submit', async function (e) {
   } catch (e) {
     sendBtn.innerHTML = 'Send Message';
     showToast('Something went wrong', 'error');
-    console.error(e);
   }
 });
 

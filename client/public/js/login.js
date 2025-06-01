@@ -125,7 +125,6 @@ form.addEventListener('submit', async (e) => {
         err.message || 'Registration failed. Please try again.',
         'error',
       );
-      console.error('Registration failed:', err);
     }
   } else {
     showToast('Please Fill all the Field', 'error');

@@ -108,7 +108,6 @@ async function fetchCourses() {
       }
     }
   } catch (error) {
-    console.error('Error fetching courses:', error);
     const fallbackSection = document.createElement('section');
     fallbackSection.className = 'featured-courses';
     fallbackSection.innerHTML = `
@@ -123,9 +122,4 @@ async function fetchCourses() {
   }
 }
 
-// document.querySelectorAll('a').forEach((e) =>
-//   e.addEventListener('click', () => {
-//     console.log(e.href);
-//   }),
-// );
 document.addEventListener('DOMContentLoaded', fetchCourses);

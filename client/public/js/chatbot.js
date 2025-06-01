@@ -1,14 +1,14 @@
-const micButton = document.getElementById('mic-button');
-const chatSection = document.getElementById('chat-section');
-const emptyState = document.getElementById('empty-state');
-const conversation = document.getElementById('conversation');
-const input = document.getElementById('input');
-const clearChat = document.querySelector('.clear');
-const closeModal = document.querySelector('.close');
-const volume = document.querySelector('.speaker');
-const chatBotToggle = document.querySelector('.chatbot');
-const chatBotContainer = document.querySelector('.chatbot-container');
-const appContainer = document.querySelector('.app-container');
+const micButton = document.getElementById("mic-button");
+const chatSection = document.getElementById("chat-section");
+const emptyState = document.getElementById("empty-state");
+const conversation = document.getElementById("conversation");
+const input = document.getElementById("input");
+const clearChat = document.querySelector(".clear");
+const closeModal = document.querySelector(".close");
+const volume = document.querySelector(".speaker");
+const chatBotToggle = document.querySelector(".chatbot");
+const chatBotContainer = document.querySelector(".chatbot-container");
+const appContainer = document.querySelector(".app-container");
 
 function stopScrollBody() {
   const scrollBarWidth =
@@ -16,14 +16,14 @@ function stopScrollBody() {
   chatBotToggle.style.right = `calc(1rem + ${scrollBarWidth}px)`;
   chatBotContainer.style.left = `calc(50% - ${scrollBarWidth / 2}px)`;
   document.body.style.paddingRight = `${scrollBarWidth}px`;
-  document.body.style.overflow = 'hidden';
+  document.body.style.overflow = "hidden";
 }
 
 function addScrollBody() {
-  chatBotContainer.style.left = '';
-  chatBotToggle.style.right = '';
-  document.body.style.paddingRight = '';
-  document.body.style.overflow = '';
+  chatBotContainer.style.left = "";
+  chatBotToggle.style.right = "";
+  document.body.style.paddingRight = "";
+  document.body.style.overflow = "";
 }
 
 let isOpen = false;
@@ -31,10 +31,10 @@ let once = false;
 function toggleChatBotModal() {
   isOpen = !isOpen;
   if (isOpen) {
-    chatBotContainer.style.display = 'block';
+    chatBotContainer.style.display = "block";
     stopScrollBody();
   } else {
-    chatBotContainer.style.display = 'none';
+    chatBotContainer.style.display = "none";
     addScrollBody();
   }
 
@@ -44,10 +44,8 @@ function toggleChatBotModal() {
   }
 }
 
-// Initialize mute state from session storage
-let isMute = sessionStorage.getItem('isMute') === 'true';
+let isMute = sessionStorage.getItem("isMute") === "true";
 
-// Update UI based on initial state
 function updateVolumeUI() {
   if (isMute) {
     volume.innerHTML = '<i class="fa-solid fa-volume-xmark"></i>';
@@ -58,39 +56,36 @@ function updateVolumeUI() {
 
 function toggleVolume() {
   isMute = !isMute;
-  // Save to session storage
-  sessionStorage.setItem('isMute', isMute);
+  sessionStorage.setItem("isMute", isMute);
   updateVolumeUI();
 }
 
 function clearChatData() {
-  console.log('cleared');
-  conversation.innerHTML = '';
+  conversation.innerHTML = "";
   conversationStarted = false;
   initBot();
 }
 
 function closeModalContainer() {
-  console.log('close');
-  chatBotContainer.style.display = 'none';
+  chatBotContainer.style.display = "none";
   isOpen = false;
   addScrollBody();
 }
 
 function listening(message) {
   input.placeholder = message;
-  input.style.textAlign = 'center';
+  input.style.textAlign = "center";
 }
 
 function stopListening() {
-  input.placeholder = 'Enter message here...';
-  input.style.textAlign = '';
+  input.placeholder = "Enter message here...";
+  input.style.textAlign = "";
 }
 
-chatBotToggle.addEventListener('click', toggleChatBotModal);
-volume.addEventListener('click', toggleVolume);
-clearChat.addEventListener('click', clearChatData);
-closeModal.addEventListener('click', closeModalContainer);
+chatBotToggle.addEventListener("click", toggleChatBotModal);
+volume.addEventListener("click", toggleVolume);
+clearChat.addEventListener("click", clearChatData);
+closeModal.addEventListener("click", closeModalContainer);
 
 const SpeechRecognition =
   window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -98,11 +93,11 @@ const recognition = new SpeechRecognition();
 
 recognition.continuous = false;
 recognition.interimResults = true;
-recognition.lang = 'en-IN';
+recognition.lang = "en-IN";
 recognition.maxAlternatives = 1;
 
 let isListening = false;
-let finalTranscript = '';
+let finalTranscript = "";
 let conversationStarted = false;
 
 function initBot() {
@@ -112,9 +107,9 @@ function initBot() {
   hideEmptyState();
 }
 
-input.addEventListener('keypress', (e) => {
-  if (e.key === 'Enter') {
-    finalTranscript = '';
+input.addEventListener("keypress", (e) => {
+  if (e.key === "Enter") {
+    finalTranscript = "";
     finalTranscript = input.value.trim();
     if (finalTranscript) {
       if (!conversationStarted) {
@@ -123,7 +118,7 @@ input.addEventListener('keypress', (e) => {
       }
       addUserMessage(finalTranscript);
       sendToServer(finalTranscript);
-      input.value = '';
+      input.value = "";
     }
   }
 });
@@ -138,16 +133,16 @@ micButton.onclick = () => {
 
 recognition.onstart = () => {
   isListening = true;
-  micButton.classList.add('listening');
-  listening('Listening...');
+  micButton.classList.add("listening");
+  listening("Listening...");
 };
 
 recognition.onresult = (event) => {
-  finalTranscript = '';
+  finalTranscript = "";
   for (let i = event.resultIndex; i < event.results.length; i++) {
     finalTranscript += event.results[i][0].transcript;
   }
-  listening('Processing...');
+  listening("Processing...");
 };
 
 recognition.onend = () => {
@@ -159,28 +154,28 @@ recognition.onend = () => {
     addUserMessage(finalTranscript.trim());
     sendToServer(finalTranscript.trim());
   }
-  micButton.classList.remove('listening');
+  micButton.classList.remove("listening");
   isListening = false;
   stopListening();
 };
 
 recognition.onerror = (event) => {
   stopListening();
-  micButton.classList.remove('listening');
+  micButton.classList.remove("listening");
   isListening = false;
-  finalTranscript = '';
+  finalTranscript = "";
   setTimeout(() => {
     stopListening();
   }, 3000);
 };
 
 function hideEmptyState() {
-  emptyState.style.display = 'none';
+  emptyState.style.display = "none";
 }
 
 function addUserMessage(text) {
-  const userBox = document.createElement('div');
-  userBox.className = 'chat-box user';
+  const userBox = document.createElement("div");
+  userBox.className = "chat-box user";
   userBox.innerHTML = `
     <div class="profile">
       <div class="profile-icon"><i class="fas fa-user"></i></div>
@@ -192,19 +187,83 @@ function addUserMessage(text) {
   scrollToBottom();
 }
 
-function addAIMessage(text) {
-  const aiBox = document.createElement('div');
-  aiBox.className = 'chat-box ai';
+function addAIMessage(htmlText) {
+  const aiBox = document.createElement("div");
+  aiBox.className = "chat-box ai";
+
   aiBox.innerHTML = `
     <div class="profile">
       <div class="profile-icon" id="ai-icon-${Date.now()}"><img src='/img/co.avif' alt='ai-avatar'/></div>
       <div class="profile-name">Nova</div>
     </div>
-    <div class="chat-bubble">${text}</div>
+    <div class="chat-bubble markdown-output"></div>
   `;
+
   conversation.appendChild(aiBox);
-  scrollToBottom();
-  return aiBox.querySelector('.profile-icon').id;
+
+  const bubble = aiBox.querySelector(".chat-bubble");
+  bubble.innerHTML = "";
+
+  const temp = document.createElement("div");
+  temp.innerHTML = htmlText;
+
+  const textNodes = [];
+
+  for (const node of temp.childNodes) {
+    const blank = cloneWithEmptyText(node);
+    bubble.appendChild(blank);
+    collectTextNodes(node, blank);
+  }
+
+  let nodeIndex = 0;
+  let charIndex = 0;
+
+  function typeNext() {
+    if (nodeIndex >= textNodes.length) {
+      hljs.highlightAll();
+      return;
+    }
+
+    const { original, clone } = textNodes[nodeIndex];
+    const text = original.textContent;
+
+    if (charIndex < text.length) {
+      clone.textContent += text[charIndex];
+      charIndex++;
+      setTimeout(typeNext, 15);
+    } else {
+      nodeIndex++;
+      charIndex = 0;
+      setTimeout(typeNext, 0);
+    }
+    scrollToBottom();
+  }
+
+  typeNext();
+
+  return aiBox.querySelector(".profile-icon").id;
+
+  function cloneWithEmptyText(node) {
+    if (node.nodeType === Node.TEXT_NODE) {
+      return document.createTextNode("");
+    }
+
+    const clone = node.cloneNode(false);
+    for (const child of node.childNodes) {
+      clone.appendChild(cloneWithEmptyText(child));
+    }
+    return clone;
+  }
+
+  function collectTextNodes(origNode, cloneNode) {
+    if (origNode.nodeType === Node.TEXT_NODE && origNode.textContent.trim()) {
+      textNodes.push({ original: origNode, clone: cloneNode });
+    } else {
+      for (let i = 0; i < origNode.childNodes.length; i++) {
+        collectTextNodes(origNode.childNodes[i], cloneNode.childNodes[i]);
+      }
+    }
+  }
 }
 
 function scrollToBottom() {
@@ -214,13 +273,13 @@ function scrollToBottom() {
 }
 
 async function sendToServer(prompt) {
-  listening('Getting response...');
+  listening("Getting response...");
 
   try {
-    const response = await fetch('/chat', {
-      method: 'POST',
+    const response = await fetch("/chat", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({ prompt }),
     });
@@ -231,23 +290,17 @@ async function sendToServer(prompt) {
       throw new Error(result.error);
     }
 
-    const speechText = result.message;
-    const speech = result.message
-      .replace(
-        /([\u2700-\u27BF]|[\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|\uD83E[\uDD00-\uDDFF])/g,
-        '',
-      )
-      .replace(/[^a-zA-Z\s,\.?!]/g, '');
+    const message = result.html;
+    const speech = result.speech;
 
-    const iconId = addAIMessage(speechText);
+    const iconId = addAIMessage(message);
     textToSpeech(speech, iconId);
-    finalTranscript = '';
+    finalTranscript = "";
     stopListening();
   } catch (error) {
-    console.error('Error:', error);
-    finalTranscript = '';
+    finalTranscript = "";
     addAIMessage(
-      "I'm sorry, I couldn't process your message. Please try again.",
+      "I'm sorry, I couldn't process your message. Please try again."
     );
     stopListening();
   }
@@ -260,14 +313,14 @@ function loadVoices() {
   selectedVoice =
     voices.find(
       (v) =>
-        v.name.includes('Google') && v.name.toLowerCase().includes('female'),
+        v.name.includes("Google") && v.name.toLowerCase().includes("female")
     ) ||
     voices.find(
-      (v) => v.lang === 'en-IN' && v.name.toLowerCase().includes('female'),
+      (v) => v.lang === "en-IN" && v.name.toLowerCase().includes("female")
     ) ||
-    voices.find((v) => v.lang === 'en-IN') ||
+    voices.find((v) => v.lang === "en-IN") ||
     voices.find(
-      (v) => v.lang.includes('en') && v.name.toLowerCase().includes('female'),
+      (v) => v.lang.includes("en") && v.name.toLowerCase().includes("female")
     );
 }
 
@@ -286,16 +339,16 @@ function textToSpeech(text, iconId) {
   if (selectedVoice) {
     utterance.voice = selectedVoice;
   }
-  utterance.lang = 'en-IN';
+  utterance.lang = "en-IN";
   utterance.rate = 1.1;
   utterance.pitch = 1;
 
   const icon = document.getElementById(iconId);
   if (icon) {
-    icon.classList.add('speaking');
+    icon.classList.add("speaking");
 
     utterance.onend = () => {
-      icon.classList.remove('speaking');
+      icon.classList.remove("speaking");
     };
   }
 

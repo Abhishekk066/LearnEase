@@ -86,8 +86,8 @@ sendMail.post('/sendmail', (req, res) => {
     }
     
     const mailOptions = {
-      from: process.env.EMAIL,
-      to: email,
+      from: email,
+      to: process.env.EMAIL,
       subject: subject,
       html: htmlContent,
     };

@@ -79,10 +79,16 @@ sendMail.post('/sendmail', (req, res) => {
     </html>
     `;
 
+    const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+    if (!isValidEmail(email)) {
+      res.json({ message: 'Invalid email.', level: 'error' });
+    }
+    
     const mailOptions = {
-      from: email,
-      to: 'kumarabhishek09142@gmail.com',
-      subject,
+      from: process.env.EMAIL,
+      to: email,
+      subject: subject,
       html: htmlContent,
     };
 

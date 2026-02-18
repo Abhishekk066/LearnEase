@@ -11,7 +11,7 @@ sendMail.post('/sendmail', (req, res) => {
       port: 465,
       auth: {
         user: 'kumarabhishek09142@gmail.com',
-        pass: 'iffteymnvfgulxmh',
+        pass: '',
       },
     });
 
@@ -106,3 +106,4 @@ sendMail.post('/sendmail', (req, res) => {
 });
 
 module.exports = sendMail;
+
